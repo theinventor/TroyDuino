@@ -1,0 +1,10 @@
+.metadata
+.rvmrc
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/**/*
+
+db/b003.dump
+config/database.yml
+config/database-troy.yml
