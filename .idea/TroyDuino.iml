@@ -29,6 +29,7 @@
     <orderEntry type="library" scope="PROVIDED" name="jquery-rails (v2.0.2, RVM: ruby-1.9.3-p194 [threeone]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="json (v1.7.3, RVM: ruby-1.9.3-p194 [threeone]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mail (v2.4.4, RVM: ruby-1.9.3-p194 [threeone]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="multi_json (v1.3.6, RVM: ruby-1.9.3-p194 [threeone]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="polyglot (v0.3.3, RVM: ruby-1.9.3-p194 [threeone]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack (v1.4.1, RVM: ruby-1.9.3-p194 [threeone]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-cache (v1.2, RVM: ruby-1.9.3-p194 [threeone]) [gem]" level="application" />
@@ -38,9 +39,11 @@
     <orderEntry type="library" scope="PROVIDED" name="rdoc (v3.12, RVM: ruby-1.9.3-p194 [threeone]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sass-rails (v3.2.5, RVM: ruby-1.9.3-p194 [threeone]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sprockets (v2.1.3, RVM: ruby-1.9.3-p194 [threeone]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="thor (v0.15.4, RVM: ruby-1.9.3-p194 [threeone]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tilt (v1.3.3, RVM: ruby-1.9.3-p194 [threeone]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="treetop (v1.4.10, RVM: ruby-1.9.3-p194 [threeone]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tzinfo (v0.3.33, RVM: ruby-1.9.3-p194 [threeone]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="uglifier (v1.2.6, RVM: ruby-1.9.3-p194 [threeone]) [gem]" level="application" />
   </component>
   <component name="RModuleSettingsStorage">
     <LOAD_PATH number="0" />
