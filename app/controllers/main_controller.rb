@@ -25,6 +25,13 @@ class MainController < ApplicationController
       query = "&r=setDigitalOutput&pin=6&output=1"
     elsif params[:six] == "off"
       query = "&r=setDigitalOutput&pin=6&output=0"
+    elsif params[:seven_output]
+      query = "&r=definePinMode&pin=7&mode=1"
+    elsif params[:seven] == "on"
+      query = "&r=setDigitalOutput&pin=7&output=1"
+    elsif params[:seven] == "off"
+      query = "&r=setDigitalOutput&pin=7&output=0"
+
     else
       query = "&r=getUptime"
     end
