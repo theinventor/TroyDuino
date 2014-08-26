@@ -99,6 +99,36 @@ class MainController < ApplicationController
     render json: result
   end
 
+  def poll_ci
+
+    url = "https://ci.solanolabs.com/cc/a0bd76c1a2f85140f7efc58ca6a1a2f9d3d35c01/cctray.xml"
+    buffer = open(url, "UserAgent" => "Ruby-Wget").read
+    result = JSON.parse(buffer)
+    puts result
+
+    puts "RED: #{result["aging_red"]}"
+    puts "YELLOW: #{result["aging_yellow"]}"
+    puts "NEED DIAG: #{result["need_diagnose"]}"
+
+    if result["aging_red"].to_i > 0
+      turn_on "red"
+      puts "TURNING on red"
+    elsif result["aging_yellow"].to_i > 0
+      turn_on "yellow"
+      puts "TURNING on yellow"
+    elsif result["need_diagnose"].to_i > 0
+      turn_on "yellow"
+      puts "TURNING on yellow"
+    else
+      turn_on "green"
+      puts "TURNING on green"
+    end
+
+
+
+    render json: result
+  end
+
 
 
 
