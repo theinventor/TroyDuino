@@ -1,6 +1,7 @@
 TroyDuino::Application.routes.draw do
   get "main/index"
   get "/poll" => 'main#poll'
+  get "/poll_ci" => 'main#poll_ci'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
