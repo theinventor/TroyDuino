@@ -101,7 +101,7 @@ class MainController < ApplicationController
 
   def poll_ci
 
-    url = "https://ci.solanolabs.com/cc/a0bd76c1a2f85140f7efc58ca6a1a2f9d3d35c01/cctray.xml"
+    url = "https://snap-ci.com/d9k9TQwbdHhWf-9yWNH5NscyiRWtIrP-CYtN5Ojm9yY/RepairShopr/RepairShopr/branch/master/cctray.xml"
     buffer = open(url, "UserAgent" => "Ruby-Wget").read
     result = Hash.from_xml(buffer)
     puts result
