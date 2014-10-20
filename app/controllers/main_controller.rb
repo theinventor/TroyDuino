@@ -2,35 +2,37 @@ class MainController < ApplicationController
 
   require 'open-uri'
 
-   require 'json'
-   TELEDUINO_KEY = "9EB1A6461DE6C8F5BC2999428B9E3D25"
-   
-
-   def turn_on num
-     base_url = "http://us01.proxy.teleduino.org/api/1.0/328.php?k=#{TELEDUINO_KEY}"
-     three_on = "&r=setDigitalOutput&pin=3&output=1"
-     three_off = "&r=setDigitalOutput&pin=3&output=0"
-     five_on = "&r=setDigitalOutput&pin=5&output=1"
-     five_off = "&r=setDigitalOutput&pin=5&output=0"
-     seven_on = "&r=setDigitalOutput&pin=7&output=1"
-     seven_off = "&r=setDigitalOutput&pin=7&output=0"
+  require 'json'
+  TELEDUINO_KEY = "9EB1A6461DE6C8F5BC2999428B9E3D25"
 
 
-     if num == "red"
-       buffer = open(base_url+three_on, "UserAgent" => "Ruby-Wget").read  
-       buffer = open(base_url+five_off, "UserAgent" => "Ruby-Wget").read  
-       buffer = open(base_url+seven_off, "UserAgent" => "Ruby-Wget").read
-     elsif num == "yellow"
-       buffer = open(base_url+five_on, "UserAgent" => "Ruby-Wget").read  
-       buffer = open(base_url+three_off, "UserAgent" => "Ruby-Wget").read  
-       buffer = open(base_url+seven_off, "UserAgent" => "Ruby-Wget").read
-     elsif num == "green"
-       buffer = open(base_url+seven_on, "UserAgent" => "Ruby-Wget").read  
-       buffer = open(base_url+five_off, "UserAgent" => "Ruby-Wget").read  
-       buffer = open(base_url+three_off, "UserAgent" => "Ruby-Wget").read  
-     end
+  def turn_on num
+    key = "9EB1A6461DE6C8F5BC2999428B9E3D25"
 
-   end
+    base_url = "http://us01.proxy.teleduino.org/api/1.0/328.php?k=#{key}"
+    three_on = "&r=setDigitalOutput&pin=3&output=1"
+    three_off = "&r=setDigitalOutput&pin=3&output=0"
+    five_on = "&r=setDigitalOutput&pin=5&output=1"
+    five_off = "&r=setDigitalOutput&pin=5&output=0"
+    seven_on = "&r=setDigitalOutput&pin=7&output=1"
+    seven_off = "&r=setDigitalOutput&pin=7&output=0"
+
+
+    if num == "red"
+      buffer = open(base_url+three_on, "UserAgent" => "Ruby-Wget").read
+      buffer = open(base_url+five_off, "UserAgent" => "Ruby-Wget").read
+      buffer = open(base_url+seven_off, "UserAgent" => "Ruby-Wget").read
+    elsif num == "yellow"
+      buffer = open(base_url+five_on, "UserAgent" => "Ruby-Wget").read
+      buffer = open(base_url+three_off, "UserAgent" => "Ruby-Wget").read
+      buffer = open(base_url+seven_off, "UserAgent" => "Ruby-Wget").read
+    elsif num == "green"
+      buffer = open(base_url+seven_on, "UserAgent" => "Ruby-Wget").read
+      buffer = open(base_url+five_off, "UserAgent" => "Ruby-Wget").read
+      buffer = open(base_url+three_off, "UserAgent" => "Ruby-Wget").read
+    end
+
+  end
 
 
   def index
@@ -75,7 +77,7 @@ class MainController < ApplicationController
     buffer = open(url, "UserAgent" => "Ruby-Wget").read
     result = JSON.parse(buffer)
     puts result
-    
+
     puts "RED: #{result["aging_red"]}"
     puts "YELLOW: #{result["aging_yellow"]}"
     puts "NEED DIAG: #{result["need_diagnose"]}"
@@ -102,16 +104,22 @@ class MainController < ApplicationController
   def poll_ci
 
     url = "https://snap-ci.com/d9k9TQwbdHhWf-9yWNH5NscyiRWtIrP-CYtN5Ojm9yY/RepairShopr/RepairShopr/branch/master/cctray.xml"
-    buffer = open(url, "UserAgent" => "Ruby-Wget").read
-    result = Hash.from_xml(buffer)
+    buffer = Faraday.get(url)
+
+    result = Hash.from_xml(buffer.body)
     puts result
 
     last_status = result['Projects']["Project"].first['lastBuildStatus']
 
-    if last_status == 'Success'
-      turn_on 'green'
-    else
-      turn_on 'red'
+    begin
+      if last_status == 'Success'
+        turn_on 'green'
+      else
+        turn_on 'red'
+      end
+    rescue => ex
+      puts ex
+
     end
 
     render json: result
