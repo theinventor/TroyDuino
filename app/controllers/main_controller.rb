@@ -112,7 +112,7 @@ class MainController < ApplicationController
     last_status = 'Success'
     result['Projects']["Project"].each do |stage|
       last_status = "Failure" unless stage['lastBuildStatus'] == "Success"
-      break if stage['lastBuildStatus'] == "Success"
+      break if stage['lastBuildStatus'] == "Failure"
     end
 
     begin
@@ -122,6 +122,7 @@ class MainController < ApplicationController
         turn_on 'red'
       end
     rescue => ex
+      render text: "EX: #{ex} --- #{ex.backtrace}" and return
       puts ex
 
     end
