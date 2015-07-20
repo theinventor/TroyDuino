@@ -111,6 +111,7 @@ class MainController < ApplicationController
 
     last_status = 'Success'
     result['Projects']["Project"].each do |stage|
+      netxt if stage['name'].include?("Internal")
       last_status = "Failure" unless stage['lastBuildStatus'] == "Success"
       break if stage['lastBuildStatus'] == "Failure"
     end
