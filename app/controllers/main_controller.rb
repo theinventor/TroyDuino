@@ -109,12 +109,14 @@ class MainController < ApplicationController
     result = Hash.from_xml(buffer.body)
     puts result
 
-    last_status = 'Success'
-    result['Projects']["Project"].each do |stage|
-      next if stage['name'].include?("Internal")
-      last_status = "Failure" unless stage['lastBuildStatus'] == "Success"
-      break if stage['lastBuildStatus'] == "Failure"
-    end
+    # last_status = 'Success'
+    # result['Projects']["Project"].each do |stage|
+    #   next if stage['name'].include?("Internal")
+    #   last_status = "Failure" unless stage['lastBuildStatus'] == "Success"
+    #   break if stage['lastBuildStatus'] == "Failure"
+    # end
+
+    last_status = result['Projects']["Project"][-2]['lastBuildStatus']
 
     begin
       if last_status == 'Success'
