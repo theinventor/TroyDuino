@@ -116,7 +116,7 @@ class MainController < ApplicationController
     #   break if stage['lastBuildStatus'] == "Failure"
     # end
 
-    last_status = result['Projects']["Project"][-2]['lastBuildStatus']
+    last_status = result['Projects']["Project"][0]['lastBuildStatus']
 
     begin
       if last_status == 'Success'
